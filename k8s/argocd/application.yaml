@@ -1,0 +1,31 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: devops-backend
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/Morphess/DevOps-Final-Project.git
+    targetRevision: main
+    path: k8s/app
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: devops-app
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+      - RespectIgnoreDifferences=true
+  ignoreDifferences:
+    - group: networking.k8s.io
+      kind: Ingress
+      name: devops-backend
+      namespace: devops-app
+      jqPathExpressions:
+        - >-
+          .spec.rules[]?.http.paths[]? |
+          select((.path // "") |
+          startswith("/.well-known/acme-challenge/"))
