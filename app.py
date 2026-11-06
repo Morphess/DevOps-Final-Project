@@ -13,7 +13,7 @@ class RequestHandler(BaseHTTPRequestHandler):
 
         response = {
             "message": "running!",
-            "version": "1.0.1",
+            "version": "1.0.2",
             "pod_name": os.getenv("POD_NAME", socket.gethostname()),
             "pod_ip": os.getenv("POD_IP"),
         }
