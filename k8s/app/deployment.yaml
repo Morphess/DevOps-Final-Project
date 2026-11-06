@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: backend
-          image: morphess/devops-backend:bc1eecadda894bf0e8224c8719f7466e2c0b471e
+          image: morphess/devops-backend:0f88ee41d484094956fae3cfa9f6ed66140c56af
           imagePullPolicy: Always
           ports:
             - name: http
